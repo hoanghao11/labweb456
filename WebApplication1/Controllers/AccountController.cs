@@ -61,6 +61,7 @@ namespace WebApplication1.Controllers
             return View();
         }
 
+       
         //
         // POST: /Account/Login
         [HttpPost]
@@ -90,6 +91,7 @@ namespace WebApplication1.Controllers
                     return View(model);
             }
         }
+
 
         //
         // GET: /Account/VerifyCode
@@ -151,7 +153,7 @@ namespace WebApplication1.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser { UserName = model.Email, Email = model.Email,Name=model.Name };
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {

@@ -5,6 +5,9 @@ using System.Web;
 using System.Web.Mvc;
 using WebApplication1.Models;
 using System.Data.Entity;
+using WebApplication1.ViewModels;
+
+
 namespace WebApplication1.Controllers
 {
     public class HomeController : Controller
@@ -20,7 +23,12 @@ namespace WebApplication1.Controllers
                 .Include(c => c.Lecturer)
                 .Include(c => c.Category)
                 .Where(c => c.DateTime > DateTime.Now);
-            return View(upcommingCourses);
+            var viewModel = new CoursesViewModel
+            {
+                UpCommingCourses = upcommingCourses,
+                ShowAction=User.Identity.IsAuthenticated
+            };  
+            return View(viewModel);
         }
 
         public ActionResult About()

@@ -1,22 +1,23 @@
 ﻿
 @model WebApplication1.ViewModels.CoursesViewModel
 @{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "Attending";
+    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 @*
-<div class="row">
-    <ul>
-        @foreach(var course in Model)
-        {
-            <li>
-                @course.DateTime - @course.Lecturer.Name
-            </li>
-        }
-    </ul>
-</div>*@
-
+    <div class="row">
+        <ul>
+            @foreach(var course in Model)
+            {
+                <li>
+                    @course.DateTime - @course.Lecturer.Name
+                </li>
+            }
+        </ul>
+    </div>*@
+<h2>Attending</h2>
 <ul class="course">
-    @foreach(var course in Model.UpCommingCourses)
+    @foreach (var course in Model.UpCommingCourses)
     {
         <li>
             <div class="date">
@@ -34,9 +35,9 @@
                     {
                         <button class="btn btn-default btn-sm js-toggle-follow" data-user-id="course.LecturerId">Follow </button>
                     }
-                    
 
-                   
+
+
                 </span>
                 <span class="category">
                     @course.Category.Name
@@ -45,7 +46,7 @@
                 {
                     <button data-course-id="@course.Id" class="btn btn-default btn-sm js-toggle-attendance">Going?</button>
                 }
-                
+
             </div>
         </li>
     }
@@ -60,7 +61,7 @@
                 $.post("/api/attendances",{courseID: button.attr("data-course-id")})
                 .done(function(){
                     button.removeClass("btn-default").addClass("btn-info").text("Going");
-                
+
                 }).fail(function(){
                     alert("Something failed");
                 });
@@ -75,5 +76,5 @@
                 });
             });
         });
-    </script>    
+    </script>
 }
